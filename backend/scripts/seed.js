@@ -1,0 +1,269 @@
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import Product from '../models/Product.js';
+import Settings from '../models/Settings.js';
+
+dotenv.config();
+
+const sampleCakes = [
+  {
+    name: 'Belgian Chocolate Truffle Cake',
+    slug: 'belgian-chocolate-truffle-cake',
+    description:
+      'Indulge in layers of moist dark chocolate sponge encased in velvety smooth Belgian chocolate ganache. Handcrafted for true chocolate connoisseurs.',
+    category: 'Chocolate Cakes',
+    images: [
+      'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&w=1000&q=80',
+    ],
+    availableFlavors: ['Dark Belgian Ganache', 'Milk Chocolate Truffle', 'Nutella Infusion'],
+    availableWeights: ['0.5 kg', '1 kg', '1.5 kg', '2 kg'],
+    weightsWithPrices: [
+      { weight: '0.5 kg', price: 549 },
+      { weight: '1 kg', price: 999 },
+      { weight: '1.5 kg', price: 1449 },
+      { weight: '2 kg', price: 1899 },
+    ],
+    price: 549,
+    isEggless: true,
+    egglessAvailability: '100% Eggless',
+    inStock: true,
+    isFeatured: true,
+    rating: 4.9,
+    reviewCount: 48,
+    ingredients: ['Belgian Dark Cocoa', 'Fresh Cream', 'Butter', 'Organic Wheat Flour', 'Vanilla Bean'],
+  },
+  {
+    name: 'Classic Black Forest Cake',
+    slug: 'classic-black-forest-cake',
+    description:
+      'Traditional German Black Forest cake layered with fluffy whipped cream, tart sour cherry compote, and rich chocolate shavings on a soft cocoa sponge.',
+    category: 'Birthday Cakes',
+    images: [
+      'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=1000&q=80',
+    ],
+    availableFlavors: ['Classic Cherry Kirsch', 'Dark Cherry Cream'],
+    availableWeights: ['0.5 kg', '1 kg', '1.5 kg', '2 kg'],
+    weightsWithPrices: [
+      { weight: '0.5 kg', price: 499 },
+      { weight: '1 kg', price: 899 },
+      { weight: '1.5 kg', price: 1299 },
+      { weight: '2 kg', price: 1699 },
+    ],
+    price: 499,
+    isEggless: true,
+    egglessAvailability: '100% Eggless',
+    inStock: true,
+    isFeatured: true,
+    rating: 4.8,
+    reviewCount: 36,
+    ingredients: ['Maraschino Cherries', 'Dairy Whipping Cream', 'Cocoa Shavings', 'Sponge Flour'],
+  },
+  {
+    name: 'Red Velvet Royale with Cream Cheese',
+    slug: 'red-velvet-royale-cream-cheese',
+    description:
+      'Vibrant crimson cocoa sponge with hints of buttermilk and vanilla, generously frosted with silky New York cream cheese icing.',
+    category: 'Red Velvet',
+    images: [
+      'https://images.unsplash.com/photo-1586788680434-30d324b2d46f?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?auto=format&fit=crop&w=1000&q=80',
+    ],
+    availableFlavors: ['Authentic Cream Cheese', 'White Chocolate Whipped'],
+    availableWeights: ['0.5 kg', '1 kg', '1.5 kg', '2 kg'],
+    weightsWithPrices: [
+      { weight: '0.5 kg', price: 599 },
+      { weight: '1 kg', price: 1099 },
+      { weight: '1.5 kg', price: 1599 },
+      { weight: '2 kg', price: 2099 },
+    ],
+    price: 599,
+    isEggless: true,
+    egglessAvailability: '100% Eggless',
+    inStock: true,
+    isFeatured: true,
+    rating: 5.0,
+    reviewCount: 52,
+    ingredients: ['Philadelphia Style Cream Cheese', 'Buttermilk Essence', 'Dutch Cocoa', 'Madagascar Vanilla'],
+  },
+  {
+    name: 'Madagascar Vanilla Bean Delight',
+    slug: 'madagascar-vanilla-bean-delight',
+    description:
+      'A timeless celebration favorite featuring delicate sponge infused with pure Madagascar vanilla beans and whipped white buttercream.',
+    category: 'Birthday Cakes',
+    images: [
+      'https://images.unsplash.com/photo-1535141192574-5d4897c13136?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=1000&q=80',
+    ],
+    availableFlavors: ['Vanilla Bean', 'Buttercream Vanilla', 'Vanilla Caramel'],
+    availableWeights: ['0.5 kg', '1 kg', '1.5 kg', '2 kg'],
+    weightsWithPrices: [
+      { weight: '0.5 kg', price: 449 },
+      { weight: '1 kg', price: 799 },
+      { weight: '1.5 kg', price: 1149 },
+      { weight: '2 kg', price: 1499 },
+    ],
+    price: 449,
+    isEggless: true,
+    egglessAvailability: '100% Eggless',
+    inStock: true,
+    isFeatured: false,
+    rating: 4.7,
+    reviewCount: 22,
+    ingredients: ['Vanilla Pods', 'Pure Butter', 'Flour', 'Organic Cane Sugar'],
+  },
+  {
+    name: 'Golden Butterscotch Crunch Cake',
+    slug: 'golden-butterscotch-crunch-cake',
+    description:
+      'Light golden sponge smothered in rich butterscotch cream and loaded with handcrafted caramelized cashew praline chunks.',
+    category: 'Birthday Cakes',
+    images: [
+      'https://images.unsplash.com/photo-1562772186-3689454922c3?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1542826438-bd32f43d626f?auto=format&fit=crop&w=1000&q=80',
+    ],
+    availableFlavors: ['Butterscotch Nougat', 'Caramel Butterscotch'],
+    availableWeights: ['0.5 kg', '1 kg', '1.5 kg', '2 kg'],
+    weightsWithPrices: [
+      { weight: '0.5 kg', price: 479 },
+      { weight: '1 kg', price: 849 },
+      { weight: '1.5 kg', price: 1249 },
+      { weight: '2 kg', price: 1599 },
+    ],
+    price: 479,
+    isEggless: true,
+    egglessAvailability: '100% Eggless',
+    inStock: true,
+    isFeatured: true,
+    rating: 4.9,
+    reviewCount: 31,
+    ingredients: ['Caramelized Cashew Praline', 'Brown Butter', 'Butterscotch Glaze', 'Whipping Cream'],
+  },
+  {
+    name: 'Fresh Pineapple Glaze Cake',
+    slug: 'fresh-pineapple-glaze-cake',
+    description:
+      'Tropical bliss on a platter! Tender vanilla sponge infused with fresh pineapple pulp, crowned with juicy caramelized pineapple slices and cherries.',
+    category: 'Fruit Cakes',
+    images: [
+      'https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1549575810-b9b77548b898?auto=format&fit=crop&w=1000&q=80',
+    ],
+    availableFlavors: ['Fresh Pineapple', 'Pineapple Coconut Fusion'],
+    availableWeights: ['0.5 kg', '1 kg', '1.5 kg', '2 kg'],
+    weightsWithPrices: [
+      { weight: '0.5 kg', price: 449 },
+      { weight: '1 kg', price: 799 },
+      { weight: '1.5 kg', price: 1199 },
+      { weight: '2 kg', price: 1549 },
+    ],
+    price: 449,
+    isEggless: true,
+    egglessAvailability: '100% Eggless',
+    inStock: true,
+    isFeatured: false,
+    rating: 4.8,
+    reviewCount: 29,
+    ingredients: ['Fresh Golden Pineapples', 'Whipped Cream', 'Vanilla Infusion', 'Glace Cherries'],
+  },
+  {
+    name: 'New York Baked Blueberry Cheesecake',
+    slug: 'new-york-baked-blueberry-cheesecake',
+    description:
+      'Dense and creamy New York style baked cheesecake layered over a buttery graham cracker crust and topped with wild mountain blueberry compote.',
+    category: 'Cheesecakes',
+    images: [
+      'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1508737027454-e6454ef45afd?auto=format&fit=crop&w=1000&q=80',
+    ],
+    availableFlavors: ['Wild Blueberry', 'Mixed Berry', 'Classic Lemon Curd'],
+    availableWeights: ['0.5 kg', '1 kg', '1.5 kg'],
+    weightsWithPrices: [
+      { weight: '0.5 kg', price: 699 },
+      { weight: '1 kg', price: 1299 },
+      { weight: '1.5 kg', price: 1849 },
+    ],
+    price: 699,
+    isEggless: true,
+    egglessAvailability: '100% Eggless',
+    inStock: true,
+    isFeatured: true,
+    rating: 4.9,
+    reviewCount: 41,
+    ingredients: ['Philadelphia Cream Cheese', 'Wild Blueberries', 'Graham Cracker Crust', 'Sour Cream'],
+  },
+  {
+    name: 'Custom Celebration & Birthday Cake',
+    slug: 'custom-celebration-birthday-cake',
+    description:
+      'Bring your fantasy theme to life! Handcrafted custom designer cake tailored with customized fondant decorations, personalized name plaques, and flavor of choice.',
+    category: 'Designer Cakes',
+    images: [
+      'https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1579372786545-d24232daf58c?auto=format&fit=crop&w=1000&q=80',
+    ],
+    availableFlavors: ['Chocolate Truffle', 'Red Velvet', 'Vanilla Buttercream', 'Butterscotch Caramel'],
+    availableWeights: ['1 kg', '1.5 kg', '2 kg', '3 kg', '5 kg'],
+    weightsWithPrices: [
+      { weight: '1 kg', price: 999 },
+      { weight: '1.5 kg', price: 1499 },
+      { weight: '2 kg', price: 1999 },
+      { weight: '3 kg', price: 2899 },
+      { weight: '5 kg', price: 4599 },
+    ],
+    price: 999,
+    isEggless: true,
+    egglessAvailability: '100% Eggless',
+    inStock: true,
+    isFeatured: true,
+    rating: 5.0,
+    reviewCount: 65,
+    ingredients: ['Handmade Fondant', 'Belgian Cocoa', 'Buttercream', 'Edible Gold Accents'],
+  },
+];
+
+const seedData = async () => {
+  try {
+    const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/sweet_cake_house';
+    console.log(`Connecting to MongoDB at: ${mongoUri}`);
+    await mongoose.connect(mongoUri);
+
+    console.log('Clearing old sample products...');
+    await Product.deleteMany({});
+
+    console.log(`Inserting ${sampleCakes.length} premium sample cakes...`);
+    await Product.insertMany(sampleCakes);
+
+    console.log('Ensuring default store settings...');
+    const existingSettings = await Settings.findOne();
+    if (!existingSettings) {
+      await Settings.create({
+        shopName: 'Sweet Cake House',
+        tagline: 'Handcrafted with Love, Baked to Perfection',
+        shopAddress: 'Shop 14, Rose Villa Arcade, Baker Street, Blossom City',
+        city: 'Mumbai',
+        phone: '+91 98765 43210',
+        whatsappNumber: '919876543210',
+        email: 'orders@sweetcakehouse.com',
+        upiId: 'sweetcakehouse@upi',
+        upiHolderName: 'Sweet Cake House Bakery',
+        deliveryCharge: 50,
+        freeDeliveryAbove: 999,
+        minOrderAmount: 200,
+        businessHours: '09:00 AM - 10:30 PM (Everyday)',
+      });
+      console.log('Default settings created.');
+    }
+
+    console.log('✅ Database seeded successfully with premium bakery products and settings!');
+    process.exit(0);
+  } catch (err) {
+    console.error('❌ Seeding failed:', err.message);
+    process.exit(1);
+  }
+};
+
+seedData();
+
