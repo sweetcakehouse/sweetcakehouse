@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Cake, Lock, Mail, ArrowRight, AlertCircle, Shield } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
+import { Cake, Lock, Mail, ArrowRight, AlertCircle } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useSettings } from '../../context/SettingsContext';
 
 const AdminLoginPage = () => {
-  const [email, setEmail] = useState('admin@sweetcakehouse.com');
-  const [password, setPassword] = useState('Admin@123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -45,15 +45,6 @@ const AdminLoginPage = () => {
           <p className="text-xs text-choco-500">Staff & Management Portal</p>
         </div>
 
-        {/* Demo credentials hint */}
-        <div className="p-3 bg-cream-100 rounded-2xl border border-cream-200 text-xs text-choco-700 space-y-1">
-          <span className="font-bold text-choco-900 flex items-center gap-1">
-            <Shield className="w-3.5 h-3.5 text-rosebakery-500" /> Default Admin Credentials:
-          </span>
-          <p className="font-mono text-[11px]">Email: admin@sweetcakehouse.com</p>
-          <p className="font-mono text-[11px]">Password: Admin@123</p>
-        </div>
-
         {errorMsg && (
           <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 rounded-2xl text-xs font-semibold flex items-center gap-2">
             <AlertCircle className="w-4 h-4 flex-shrink-0" />
@@ -71,7 +62,7 @@ const AdminLoginPage = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@sweetcakehouse.com"
+                placeholder="Enter your admin email"
                 className="w-full pl-11 pr-4 py-3 rounded-2xl border border-rosebakery-100 focus:border-rosebakery-400 focus:ring-2 focus:ring-rosebakery-100 outline-none text-sm"
               />
             </div>
@@ -86,7 +77,7 @@ const AdminLoginPage = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
+                placeholder="Enter your password"
                 className="w-full pl-11 pr-4 py-3 rounded-2xl border border-rosebakery-100 focus:border-rosebakery-400 focus:ring-2 focus:ring-rosebakery-100 outline-none text-sm"
               />
             </div>
@@ -103,13 +94,12 @@ const AdminLoginPage = () => {
         </form>
 
         <div className="text-center pt-2">
-          <button
-            type="button"
-            onClick={() => navigate('/')}
-            className="text-xs text-choco-400 hover:text-choco-700 transition-colors"
+          <Link
+            to="/"
+            className="text-xs font-medium text-choco-400 hover:text-rosebakery-600 transition-colors"
           >
             ← Back to Customer Website
-          </button>
+          </Link>
         </div>
       </div>
     </div>
@@ -117,4 +107,3 @@ const AdminLoginPage = () => {
 };
 
 export default AdminLoginPage;
-

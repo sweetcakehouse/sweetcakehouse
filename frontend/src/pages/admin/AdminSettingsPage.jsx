@@ -1,13 +1,43 @@
 import React, { useState } from 'react';
-import { Settings, Save, Check, QrCode, Phone, MessageCircle, Truck } from 'lucide-react';
+import { Settings, Save, Check, QrCode, Phone, MessageCircle, Truck, Key, ShieldCheck, AlertCircle } from 'lucide-react';
 import { useSettings } from '../../context/SettingsContext';
-import { updateSettings } from '../../services/api';
+import { updateSettings, updateAdminCredentials } from '../../services/api';
 
 const AdminSettingsPage = () => {
   const { settings, reloadSettings } = useSettings();
   const [formData, setFormData] = useState({ ...settings });
   const [saving, setSaving] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
+
+  // Password change state
+  const [credData, setCredData] = useState({
+    email: '',
+    currentPassword: '',
+    newPassword: '',
+  });
+  const [credSaving, setCredSaving] = useState(false);
+  const [credSuccess, setCredSuccess] = useState('');
+  const [credError, setCredError] = useState('');
+
+  const handleCredSubmit = async (e) => {
+    e.preventDefault();
+    setCredSaving(true);
+    setCredSuccess('');
+    setCredError('');
+
+    try {
+      const res = await updateAdminCredentials(credData);
+      setCredSuccess(res.data?.message || 'Admin login credentials updated successfully!');
+      setCredData({ email: '', currentPassword: '', newPassword: '' });
+      setTimeout(() => setCredSuccess(''), 4000);
+    } catch (err) {
+      setCredError(
+        err.response?.data?.message || err.message || 'Failed to update credentials. Please check your current password.'
+      );
+    } finally {
+      setCredSaving(false);
+    }
+  };
 
   const handleSave = async (e) => {
     e.preventDefault();
@@ -253,6 +283,77 @@ const AdminSettingsPage = () => {
           </button>
         </div>
       </form>
+
+      {/* 4. Security & Admin Credentials */}
+      <div className="bg-white p-6 sm:p-8 rounded-3xl border border-rosebakery-100 shadow-soft space-y-4 text-xs">
+        <h3 className="font-serif text-lg font-bold text-choco-900 pb-2 border-b border-rosebakery-100 flex items-center gap-2">
+          <Key className="w-5 h-5 text-rosebakery-500" />
+          <span>4. Change Admin Login & Password</span>
+        </h3>
+        <p className="text-choco-500 text-[11px]">
+          Keep your management portal safe. You can update your admin email and password anytime here.
+        </p>
+
+        {credSuccess && (
+          <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl font-semibold flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+            <span>{credSuccess}</span>
+          </div>
+        )}
+
+        {credError && (
+          <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl font-semibold flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 text-rose-600 flex-shrink-0" />
+            <span>{credError}</span>
+          </div>
+        )}
+
+        <form onSubmit={handleCredSubmit} className="space-y-4 max-w-lg">
+          <div>
+            <label className="block font-bold text-choco-900 mb-1">New Admin Email (Optional)</label>
+            <input
+              type="email"
+              value={credData.email}
+              onChange={(e) => setCredData({ ...credData, email: e.target.value })}
+              placeholder="e.g. yourname@sweetcakehouse.com"
+              className="w-full px-4 py-2.5 rounded-xl border border-rosebakery-100 text-sm outline-none"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block font-bold text-choco-900 mb-1">Current Password</label>
+              <input
+                type="password"
+                value={credData.currentPassword}
+                onChange={(e) => setCredData({ ...credData, currentPassword: e.target.value })}
+                placeholder="Current password"
+                className="w-full px-4 py-2.5 rounded-xl border border-rosebakery-100 text-sm outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="block font-bold text-choco-900 mb-1">New Password</label>
+              <input
+                type="password"
+                value={credData.newPassword}
+                onChange={(e) => setCredData({ ...credData, newPassword: e.target.value })}
+                placeholder="New strong password"
+                className="w-full px-4 py-2.5 rounded-xl border border-rosebakery-100 text-sm outline-none"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            disabled={credSaving || (!credData.email && !credData.newPassword)}
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-choco-900 hover:bg-choco-800 text-white font-bold text-xs uppercase tracking-wider shadow-sm transition-all disabled:opacity-50"
+          >
+            <Key className="w-3.5 h-3.5" />
+            <span>{credSaving ? 'Updating...' : 'Update Password / Email'}</span>
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

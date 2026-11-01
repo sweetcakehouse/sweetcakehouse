@@ -66,6 +66,7 @@ export const updateSettings = (settingsData) => api.put('/settings', settingsDat
 // Auth API
 export const adminLogin = (credentials) => api.post('/auth/login', credentials);
 export const fetchAdminMe = () => api.get('/auth/me');
+export const updateAdminCredentials = (data) => api.put('/auth/credentials', data);
 
 // File Upload API
 export const uploadImage = (file) => {

@@ -103,3 +103,52 @@ export const getMe = async (req, res, next) => {
     next(error);
   }
 };
+
+// @desc    Update admin credentials (email / password)
+// @route   PUT /api/auth/credentials
+// @access  Private (Admin)
+export const updateCredentials = async (req, res, next) => {
+  try {
+    const { email, currentPassword, newPassword } = req.body;
+    const adminId = req.admin._id || req.admin.id;
+
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(400).json({
+        success: false,
+        message: 'Cannot update password in offline mode.',
+      });
+    }
+
+    const admin = await Admin.findById(adminId);
+    if (!admin) {
+      return res.status(404).json({ success: false, message: 'Admin not found.' });
+    }
+
+    if (currentPassword && newPassword) {
+      const isMatch = await admin.comparePassword(currentPassword);
+      if (!isMatch) {
+        return res.status(400).json({ success: false, message: 'Current password is incorrect.' });
+      }
+      admin.password = newPassword;
+    }
+
+    if (email && email.trim()) {
+      admin.email = email.toLowerCase().trim();
+    }
+
+    await admin.save();
+
+    res.json({
+      success: true,
+      message: 'Admin credentials updated successfully!',
+      admin: {
+        id: admin._id,
+        name: admin.name,
+        email: admin.email,
+        role: admin.role,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
