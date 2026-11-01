@@ -293,45 +293,55 @@ const ProductDetailPage = () => {
 
           {/* Quantity & CTAs */}
           <div className="pt-4 border-t border-rosebakery-100 space-y-4">
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
               {/* Quantity */}
-              <div className="flex items-center border border-rosebakery-200 rounded-2xl bg-white p-1">
-                <button
-                  type="button"
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-9 h-9 rounded-xl flex items-center justify-center text-choco-600 hover:bg-rosebakery-50 transition-colors font-bold text-base"
-                >
-                  -
-                </button>
-                <span className="w-10 text-center font-bold text-sm text-choco-900">{quantity}</span>
-                <button
-                  type="button"
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="w-9 h-9 rounded-xl flex items-center justify-center text-choco-600 hover:bg-rosebakery-50 transition-colors font-bold text-base"
-                >
-                  +
-                </button>
+              <div className="flex items-center justify-between sm:justify-start gap-3">
+                <span className="text-xs font-bold text-choco-700 uppercase tracking-wider sm:hidden">
+                  {t('cart.quantity', 'Quantity')}:
+                </span>
+                <div className="flex items-center border border-rosebakery-200 rounded-2xl bg-white p-1 shadow-2xs">
+                  <button
+                    type="button"
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    className="w-9 h-9 rounded-xl flex items-center justify-center text-choco-600 hover:bg-rosebakery-50 transition-colors font-bold text-base active:scale-95"
+                    aria-label="Decrease quantity"
+                  >
+                    -
+                  </button>
+                  <span className="w-10 text-center font-bold text-sm text-choco-900">{quantity}</span>
+                  <button
+                    type="button"
+                    onClick={() => setQuantity(quantity + 1)}
+                    className="w-9 h-9 rounded-xl flex items-center justify-center text-choco-600 hover:bg-rosebakery-50 transition-colors font-bold text-base active:scale-95"
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
+                </div>
               </div>
 
-              {/* Add to Cart */}
-              <button
-                type="button"
-                onClick={handleAddToCart}
-                className="flex-1 py-3.5 px-6 rounded-2xl bg-rosebakery-50 hover:bg-rosebakery-100 text-rosebakery-700 font-bold text-sm border border-rosebakery-200 transition-all flex items-center justify-center gap-2 active:scale-95"
-              >
-                <ShoppingBag className="w-4 h-4" />
-                <span>{t('cart.item', 'Add to Cart')}</span>
-              </button>
+              {/* Dual Action Buttons */}
+              <div className="grid grid-cols-2 gap-2.5 sm:gap-3 flex-1">
+                {/* Add to Cart */}
+                <button
+                  type="button"
+                  onClick={handleAddToCart}
+                  className="w-full py-3.5 px-3 sm:px-5 rounded-2xl bg-rosebakery-50 hover:bg-rosebakery-100 text-rosebakery-700 font-bold text-xs sm:text-sm border border-rosebakery-200 transition-all flex items-center justify-center gap-2 active:scale-95 shadow-xs"
+                >
+                  <ShoppingBag className="w-4 h-4 flex-shrink-0" />
+                  <span className="truncate">{t('product.addToCart', 'Add to Cart')}</span>
+                </button>
 
-              {/* Order Now */}
-              <button
-                type="button"
-                onClick={handleOrderNow}
-                className="flex-1 py-3.5 px-6 rounded-2xl bg-rosebakery-500 hover:bg-rosebakery-600 text-white font-bold text-sm shadow-md hover:shadow-xl transition-all flex items-center justify-center gap-2 active:scale-95"
-              >
-                <Zap className="w-4 h-4" />
-                <span>{t('customCake.teaserBtn', 'Order Now')}</span>
-              </button>
+                {/* Buy Now */}
+                <button
+                  type="button"
+                  onClick={handleOrderNow}
+                  className="w-full py-3.5 px-3 sm:px-5 rounded-2xl bg-gradient-to-r from-rosebakery-500 to-rosebakery-600 hover:from-rosebakery-600 hover:to-rosebakery-700 text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-xl transition-all flex items-center justify-center gap-2 active:scale-95"
+                >
+                  <Zap className="w-4 h-4 flex-shrink-0 fill-current" />
+                  <span className="truncate">{t('product.buyNow', 'Buy Now')}</span>
+                </button>
+              </div>
             </div>
 
             {/* Added to cart toast message */}

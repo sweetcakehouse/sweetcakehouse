@@ -42,7 +42,7 @@ export default {
       },
       fontFamily: {
         serif: ['"Playfair Display"', 'Georgia', 'serif'],
-        sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', '"Noto Sans Devanagari"', 'Inter', 'sans-serif'],
       },
       boxShadow: {
         soft: '0 10px 30px -10px rgba(62, 39, 35, 0.08)',

@@ -89,7 +89,7 @@ const CatalogPage = () => {
         <span className="text-xs font-bold text-rosebakery-600 uppercase tracking-widest">
           Fresh From Our Ovens
         </span>
-        <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-choco-900">
+        <h1 className="font-serif fluid-section-title font-bold text-choco-900">
           {t('catalog.title', 'Our Artisanal Cake Collection')}
         </h1>
         <p className="text-sm text-choco-600">

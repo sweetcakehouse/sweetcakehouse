@@ -47,7 +47,7 @@ const UpiPaymentSection = ({
   };
 
   return (
-    <div className="bg-white rounded-3xl p-6 md:p-8 border border-rosebakery-100 shadow-soft space-y-6">
+    <div className="bg-white rounded-3xl p-4 sm:p-6 md:p-8 border border-rosebakery-100 shadow-soft space-y-6">
       <div className="flex items-center gap-3 pb-4 border-b border-rosebakery-100">
         <div className="w-10 h-10 rounded-2xl bg-rosebakery-50 text-rosebakery-600 flex items-center justify-center font-bold">
           <QrCode className="w-5 h-5" />
@@ -84,7 +84,7 @@ const UpiPaymentSection = ({
             <img
               src={displayQr}
               alt="Sweet Cake House UPI QR"
-              className="w-48 h-48 object-contain rounded-lg"
+              className="w-40 h-40 sm:w-48 sm:h-48 object-contain rounded-lg"
             />
           </div>
 

@@ -86,7 +86,7 @@ const OrderSuccessPage = () => {
           <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
             {t('orderSuccess.title', 'Order Successfully Placed')}
           </span>
-          <h1 className="font-serif text-3xl sm:text-4xl font-bold text-choco-900 pt-2">
+          <h1 className="font-serif fluid-section-title font-bold text-choco-900 pt-2">
             Thank You, {orderData.customer?.name}!
           </h1>
           <p className="text-sm text-choco-600">

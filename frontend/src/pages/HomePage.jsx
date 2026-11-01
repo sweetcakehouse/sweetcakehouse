@@ -112,14 +112,14 @@ const HomePage = () => {
                 <span>{t('hero.tag', 'Artisanal Bakery & Fresh Cake Studio')}</span>
               </div>
 
-              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-black text-choco-900 leading-[1.15] tracking-tight">
+              <h1 className="font-serif fluid-hero-title font-black text-choco-900 leading-[1.15] tracking-tight">
                 {t('hero.titleLine1', 'Handcrafted with Love,')} <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-rosebakery-600 via-rosebakery-500 to-amber-600">
                   {t('hero.titleLine2', 'Baked to Perfection.')}
                 </span>
               </h1>
 
-              <p className="text-base sm:text-lg text-choco-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+              <p className="text-sm sm:text-lg text-choco-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
                 {t(
                   'hero.subtitle',
                   'Celebrate every milestone with our freshly baked, 100% vegetarian & eggless cakes, velvety Belgian truffles, and bespoke custom designs crafted exclusively for you.'
@@ -127,10 +127,10 @@ const HomePage = () => {
               </p>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-2">
                 <Link
                   to="/cakes"
-                  className="w-full sm:w-auto px-8 py-4 rounded-full bg-rosebakery-500 hover:bg-rosebakery-600 text-white font-bold text-sm shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 active:scale-95"
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-rosebakery-500 hover:bg-rosebakery-600 text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 active:scale-95"
                 >
                   <ShoppingBag className="w-4 h-4" />
                   <span>{t('hero.exploreBtn', 'Explore All Cakes')}</span>
@@ -143,7 +143,7 @@ const HomePage = () => {
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-7 py-4 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 active:scale-95"
+                  className="w-full sm:w-auto px-6 sm:px-7 py-3.5 sm:py-4 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 active:scale-95"
                 >
                   <MessageCircle className="w-4 h-4 fill-white" />
                   <span>{t('hero.whatsappBtn', 'Order on WhatsApp')}</span>
@@ -151,28 +151,28 @@ const HomePage = () => {
               </div>
 
               {/* Trust Micro-Badges */}
-              <div className="pt-6 grid grid-cols-3 gap-4 border-t border-rosebakery-100/80 text-left max-w-lg mx-auto lg:mx-0">
+              <div className="pt-6 grid grid-cols-3 gap-2 sm:gap-4 border-t border-rosebakery-100/80 text-left max-w-lg mx-auto lg:mx-0">
                 <div>
-                  <span className="block font-serif text-xl sm:text-2xl font-black text-choco-900">
+                  <span className="block font-serif text-lg sm:text-2xl font-black text-choco-900 leading-tight">
                     {t('hero.stat1Number', '100%')}
                   </span>
-                  <span className="text-xs text-choco-500 font-medium">
+                  <span className="text-[10px] sm:text-xs text-choco-500 font-medium leading-tight block mt-0.5">
                     {t('hero.stat1Label', 'Pure Veg / Eggless')}
                   </span>
                 </div>
                 <div>
-                  <span className="block font-serif text-xl sm:text-2xl font-black text-choco-900">
+                  <span className="block font-serif text-lg sm:text-2xl font-black text-choco-900 leading-tight">
                     {t('hero.stat2Number', '2 Hours')}
                   </span>
-                  <span className="text-xs text-choco-500 font-medium">
+                  <span className="text-[10px] sm:text-xs text-choco-500 font-medium leading-tight block mt-0.5">
                     {t('hero.stat2Label', 'Express Delivery')}
                   </span>
                 </div>
                 <div>
-                  <span className="block font-serif text-xl sm:text-2xl font-black text-choco-900">
+                  <span className="block font-serif text-lg sm:text-2xl font-black text-choco-900 leading-tight">
                     {t('hero.stat3Number', '4.9 ★')}
                   </span>
-                  <span className="text-xs text-choco-500 font-medium">
+                  <span className="text-[10px] sm:text-xs text-choco-500 font-medium leading-tight block mt-0.5">
                     {t('hero.stat3Label', '5,000+ Happy Smiles')}
                   </span>
                 </div>
@@ -180,20 +180,20 @@ const HomePage = () => {
             </div>
 
             {/* Right: Three.js Interactive 3D Cake Showcase */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative mx-auto max-w-md lg:max-w-none rounded-3xl bg-gradient-to-b from-white/90 to-rosebakery-50/80 p-4 border border-rosebakery-100 shadow-xl backdrop-blur-sm">
+            <div className="lg:col-span-5 relative mt-6 lg:mt-0">
+              <div className="relative mx-auto max-w-md lg:max-w-none rounded-3xl bg-gradient-to-b from-white/90 to-rosebakery-50/80 p-3 sm:p-4 border border-rosebakery-100 shadow-xl backdrop-blur-sm">
                 {/* 3D Canvas */}
-                <Cake3DScene className="h-[360px] sm:h-[420px] w-full rounded-2xl" />
+                <Cake3DScene className="h-[300px] xs:h-[350px] sm:h-[420px] w-full rounded-2xl" />
 
-                {/* Floating pill badges */}
-                <div className="absolute -top-3 -right-3 bg-white px-3.5 py-1.5 rounded-2xl shadow-lg border border-rosebakery-100 flex items-center gap-1.5 text-xs font-bold text-rosebakery-600 animate-pulse">
-                  <Flame className="w-4 h-4 text-amber-500 fill-amber-500" />
-                  {t('hero.badgeFresh', 'Freshly Baked Today')}
+                {/* Floating pill badges (constrained on mobile to prevent horizontal scroll) */}
+                <div className="absolute top-2 right-2 sm:-top-3 sm:-right-3 bg-white px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-2xl shadow-lg border border-rosebakery-100 flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-rosebakery-600 animate-pulse">
+                  <Flame className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                  <span>{t('hero.badgeFresh', 'Freshly Baked Today')}</span>
                 </div>
 
-                <div className="absolute -bottom-3 -left-3 bg-white px-3.5 py-1.5 rounded-2xl shadow-lg border border-rosebakery-100 flex items-center gap-1.5 text-xs font-bold text-emerald-700">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
-                  {t('hero.badgeEggless', '100% Eggless Sponge')}
+                <div className="absolute bottom-2 left-2 sm:-bottom-3 sm:-left-3 bg-white px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-2xl shadow-lg border border-rosebakery-100 flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-emerald-700">
+                  <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-600"></span>
+                  <span>{t('hero.badgeEggless', '100% Eggless Sponge')}</span>
                 </div>
               </div>
             </div>
@@ -262,7 +262,7 @@ const HomePage = () => {
               <Sparkles className="w-3.5 h-3.5" />
               <span>{t('bestseller.tag', 'Customer Favorites')}</span>
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-choco-900">
+            <h2 className="font-serif fluid-section-title font-bold text-choco-900">
               {t('bestseller.title', 'Popular Celebration Cakes')}
             </h2>
           </div>
@@ -301,7 +301,7 @@ const HomePage = () => {
             <span className="text-xs font-bold text-rosebakery-600 uppercase tracking-widest">
               {t('categories.tag', 'Flavors for Every Occasion')}
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-choco-900 mt-2">
+            <h2 className="font-serif fluid-section-title font-bold text-choco-900 mt-2">
               {t('categories.title', 'Browse Cake Categories')}
             </h2>
             <p className="text-sm text-choco-600 mt-2">
@@ -342,7 +342,7 @@ const HomePage = () => {
                 <Sparkles className="w-3.5 h-3.5" />
                 {t('customCake.badge', 'Custom Cake Studio')}
               </span>
-              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-black leading-tight">
+              <h2 className="font-serif fluid-section-title font-black leading-tight">
                 {t('customCake.teaserTitle1', 'Have a Unique Cake Idea?')} <br />
                 <span className="text-rosebakery-400">
                   {t('customCake.teaserTitle2', 'Let Us Handcraft It For You!')}
@@ -394,7 +394,7 @@ const HomePage = () => {
           <span className="text-xs font-bold text-rosebakery-600 uppercase tracking-widest">
             {t('testimonials.tag', 'Sweet Customer Stories')}
           </span>
-          <h2 className="font-serif text-3xl font-bold text-choco-900 mt-2">
+          <h2 className="font-serif fluid-section-title font-bold text-choco-900 mt-2">
             {t('testimonials.title', 'Loved by Cake Lovers')}
           </h2>
         </div>

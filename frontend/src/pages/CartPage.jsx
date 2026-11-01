@@ -53,7 +53,7 @@ const CartPage = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-rosebakery-100">
         <div>
-          <h1 className="font-serif text-3xl font-bold text-choco-900">
+          <h1 className="font-serif fluid-section-title font-bold text-choco-900">
             {t('cart.title', 'Shopping Cart')}
           </h1>
           <p className="text-xs text-choco-500 mt-1">

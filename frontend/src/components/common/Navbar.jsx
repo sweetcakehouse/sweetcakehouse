@@ -24,25 +24,27 @@ const Navbar = () => {
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-rosebakery-100 shadow-xs transition-all">
       {/* Top micro bar */}
-      <div className="bg-gradient-to-r from-rosebakery-600 via-rosebakery-500 to-rosebakery-600 text-white text-xs py-1.5 px-4 text-center font-medium tracking-wide flex justify-center items-center gap-2">
-        <span>{t('nav.topBanner', '✨ Handcrafted Fresh Daily • 100% Pure Vegetarian / Eggless Available')}</span>
+      <div className="bg-gradient-to-r from-rosebakery-600 via-rosebakery-500 to-rosebakery-600 text-white text-[10px] sm:text-xs py-1 sm:py-1.5 px-3 sm:px-4 text-center font-medium tracking-wide flex justify-center items-center gap-1.5 sm:gap-2 leading-tight">
+        <span className="truncate max-w-[280px] sm:max-w-none">
+          {t('nav.topBanner', '✨ Handcrafted Fresh Daily • 100% Pure Vegetarian / Eggless Available')}
+        </span>
         <span className="hidden md:inline">
           {t('nav.topBannerDelivery', '• Same-Day Delivery across')} {settings.city || 'City'}
         </span>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo & Brand */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-rosebakery-500 to-rosebakery-400 flex items-center justify-center text-white shadow-md shadow-rosebakery-500/20 group-hover:scale-105 transition-transform duration-300">
-              <Cake className="w-6 h-6" />
+          <Link to="/" className="flex items-center gap-2 sm:gap-3 group min-w-0">
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-rosebakery-500 to-rosebakery-400 flex items-center justify-center text-white shadow-md shadow-rosebakery-500/20 group-hover:scale-105 transition-transform duration-300 flex-shrink-0">
+              <Cake className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <div>
-              <span className="font-serif text-2xl font-bold tracking-tight text-choco-900 group-hover:text-rosebakery-600 transition-colors">
+            <div className="min-w-0">
+              <span className="font-serif text-lg sm:text-2xl font-bold tracking-tight text-choco-900 group-hover:text-rosebakery-600 transition-colors block truncate max-w-[140px] xs:max-w-[180px] sm:max-w-none leading-tight">
                 {settings.shopName || 'Sweet Cake House'}
               </span>
-              <p className="text-[11px] text-choco-500 tracking-wider uppercase font-medium">
+              <p className="text-[9px] sm:text-[11px] text-choco-500 tracking-wider uppercase font-medium truncate">
                 Artisanal Bakery
               </p>
             </div>
@@ -68,15 +70,15 @@ const Navbar = () => {
           </nav>
 
           {/* Actions: Language Switcher, WhatsApp, Cart, Mobile Menu */}
-          <div className="flex items-center gap-2.5 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0">
             {/* Language Switcher Pill */}
             <button
               onClick={toggleLanguage}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-rosebakery-50 hover:bg-rosebakery-100 text-rosebakery-700 border border-rosebakery-200/80 transition-all active:scale-95 shadow-2xs"
+              className="inline-flex items-center gap-1 sm:gap-1.5 px-2 py-1 sm:px-3 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-semibold bg-rosebakery-50 hover:bg-rosebakery-100 text-rosebakery-700 border border-rosebakery-200/80 transition-all active:scale-95 shadow-2xs"
               title={language === 'en' ? 'हिंदी में देखें (Switch to Hindi)' : 'Switch to English'}
               aria-label="Change Language"
             >
-              <Globe className="w-3.5 h-3.5 text-rosebakery-500" />
+              <Globe className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-rosebakery-500" />
               <span className={language === 'en' ? 'font-bold text-rosebakery-800' : 'text-rosebakery-500'}>
                 EN
               </span>
@@ -102,21 +104,21 @@ const Navbar = () => {
             {/* Cart Button */}
             <Link
               to="/cart"
-              className="relative p-2.5 rounded-full bg-rosebakery-50 text-rosebakery-600 hover:bg-rosebakery-100 transition-colors shadow-2xs"
+              className="relative p-2 sm:p-2.5 rounded-full bg-rosebakery-50 text-rosebakery-600 hover:bg-rosebakery-100 transition-colors shadow-2xs"
               aria-label={t('nav.viewCart', 'View Cart')}
             >
-              <ShoppingBag className="w-5 h-5" />
+              <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5" />
               {totalItemCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-rosebakery-500 text-white text-[11px] font-bold flex items-center justify-center animate-bounce">
+                <span className="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-rosebakery-500 text-white text-[10px] sm:text-[11px] font-bold flex items-center justify-center animate-bounce">
                   {totalItemCount}
                 </span>
               )}
             </Link>
 
-            {/* Admin Link Badge */}
+            {/* Admin Link Badge (Desktop only) */}
             <Link
               to="/admin"
-              className="p-2 rounded-full text-choco-400 hover:text-choco-800 hover:bg-choco-50 transition-colors"
+              className="hidden sm:flex p-2 rounded-full text-choco-400 hover:text-choco-800 hover:bg-choco-50 transition-colors"
               title={t('nav.adminPortal', 'Admin Portal')}
             >
               <Shield className="w-4 h-4" />
@@ -125,7 +127,7 @@ const Navbar = () => {
             {/* Mobile Hamburger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-xl text-choco-800 hover:bg-rosebakery-50 transition-colors"
+              className="md:hidden p-1.5 sm:p-2 rounded-xl text-choco-800 hover:bg-rosebakery-50 transition-colors"
               aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

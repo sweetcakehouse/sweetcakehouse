@@ -37,7 +37,7 @@ const TrackOrderPage = () => {
         <div className="w-14 h-14 rounded-2xl bg-rosebakery-50 text-rosebakery-600 mx-auto flex items-center justify-center">
           <Cake className="w-7 h-7" />
         </div>
-        <h1 className="font-serif text-3xl font-bold text-choco-900">
+        <h1 className="font-serif fluid-section-title font-bold text-choco-900">
           {t('trackOrder.title', 'Track Your Cake Delivery')}
         </h1>
         <p className="text-xs text-choco-500 max-w-sm mx-auto">

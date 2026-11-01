@@ -147,7 +147,7 @@ const CustomCakePage = () => {
           <Sparkles className="w-3.5 h-3.5" />
           <span>{t('customCake.badge', 'Bespoke Pastry Craftsmanship')}</span>
         </div>
-        <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-choco-900">
+        <h1 className="font-serif fluid-section-title font-bold text-choco-900">
           {t('customCake.pageTitle', 'Design Your Custom Dream Cake')}
         </h1>
         <p className="text-sm text-choco-600 max-w-xl mx-auto">

@@ -5,16 +5,37 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
+    -webkit-text-size-adjust: 100%;
   }
+
   body {
     background-color: #FDFBF7;
     color: #3E2723;
+    overflow-x: hidden;
+    max-width: 100%;
+    min-height: 100vh;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+
+  /* Prevent text clipping across all headings & links */
+  h1, h2, h3, h4, h5, h6, p, span, a, button {
+    overflow-wrap: break-word;
+    text-wrap: balance;
   }
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: #FAF5EE;
@@ -27,7 +48,50 @@
   background: #BCAAA4;
 }
 
-.text-shadow-sm {
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+/* Utility classes for responsive design & typography */
+@layer utilities {
+  .fluid-hero-title {
+    font-size: clamp(1.85rem, 5.5vw, 3.75rem);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+
+  .fluid-section-title {
+    font-size: clamp(1.5rem, 3.8vw, 2.35rem);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
+  .fluid-card-title {
+    font-size: clamp(0.95rem, 2vw, 1.125rem);
+    line-height: 1.35;
+  }
+
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
+/* Keyframes for smooth toasts and badges */
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
